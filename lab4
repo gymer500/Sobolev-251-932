@@ -1,0 +1,84 @@
+from random import randint
+
+
+# В Python нет встроенной qsort, поэтому реализуем быструю сортировку.
+def qsort(array):
+    if len(array) <= 1:
+        return array[:]
+
+    pivot = array[len(array) // 2]
+    left = []
+    middle = []
+    right = []
+
+    for element in array:
+        if element < pivot:
+            left.append(element)
+        elif element > pivot:
+            right.append(element)
+        else:
+            middle.append(element)
+
+    return qsort(left) + middle + qsort(right)
+
+
+# Задание 1. Сортировка последовательности из 1000 целых чисел
+print("Введите 1000 целых чисел через пробел (можно в нескольких строках):")
+numbers = []
+
+while len(numbers) < 1000:
+    numbers.extend(map(int, input().split()))
+
+if len(numbers) != 1000:
+    raise ValueError("Нужно ввести ровно 1000 чисел.")
+
+print("Отсортированная последовательность:")
+print(*qsort(numbers))
+
+
+# Задание 2. Сортировка случайного массива из интервала [50, 100]
+n = int(input("\nВведите размер одномерного массива: "))
+numbers = [randint(50, 100) for _ in range(n)]
+
+print("Исходный массив:", numbers)
+print("Отсортированный массив:", qsort(numbers))
+
+
+# Задание 3. Сортировка первого столбца двумерного массива
+rows = int(input("\nВведите количество строк: "))
+columns = int(input("Введите количество столбцов: "))
+
+if rows <= 0 or columns <= 0:
+    raise ValueError("Размеры массива должны быть положительными.")
+
+matrix = [
+    [randint(5, 61) for _ in range(columns)]
+    for _ in range(rows)
+]
+
+print("Исходный массив:")
+for row in matrix:
+    print(*row)
+
+first_column = qsort([row[0] for row in matrix])
+
+# Переставляем только элементы первого столбца.
+for i in range(rows):
+    matrix[i][0] = first_column[i]
+
+print("Массив после сортировки первого столбца:")
+for row in matrix:
+    print(*row)
+
+
+# Задание 4. Сортировка списка студентов по алфавиту
+n = int(input("\nВведите количество студентов: "))
+students = []
+
+print("Введите фамилию и имя каждого студента с новой строки:")
+for _ in range(n):
+    students.append(input().strip())
+
+print("Студенты по алфавиту:")
+for student in qsort(students):
+    print(student)
