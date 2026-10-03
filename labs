@@ -1,1 +1,42 @@
+from random import randint
 
+# Задание 1. Сортировка выбором по возрастанию
+numbers = [randint(2, 103) for _ in range(10)]
+print("Исходный массив:", numbers)
+
+for i in range(len(numbers) - 1):
+    min_index = i
+    for j in range(i + 1, len(numbers)):
+        if numbers[j] < numbers[min_index]:
+            min_index = j
+    numbers[i], numbers[min_index] = numbers[min_index], numbers[i]
+
+print("По возрастанию:", numbers)
+
+
+# Задание 2. Сортировка выбором по убыванию
+numbers = [randint(0, 100) for _ in range(10)]
+print("\nИсходный массив:", numbers)
+
+for i in range(len(numbers) - 1):
+    max_index = i
+    for j in range(i + 1, len(numbers)):
+        if numbers[j] > numbers[max_index]:
+            max_index = j
+    numbers[i], numbers[max_index] = numbers[max_index], numbers[i]
+
+print("По убыванию:", numbers)
+
+
+# Задание 3. Сортировка телефонов выбором по возрастанию
+phones = ["23-45-67", "12-34-56", "98-76-54", "11-22-33", "45-67-89"]
+print("\nИсходный список телефонов:", phones)
+
+for i in range(len(phones) - 1):
+    min_index = i
+    for j in range(i + 1, len(phones)):
+        if int(phones[j].replace("-", "")) < int(phones[min_index].replace("-", "")):
+            min_index = j
+    phones[i], phones[min_index] = phones[min_index], phones[i]
+
+print("Телефоны по возрастанию:", phones)
