@@ -1,0 +1,49 @@
+# Задание 1. Вывести числа от 1 до n
+def print_numbers(n):
+    if n > 1:
+        print_numbers(n - 1)
+    print(n)
+n = int(input())
+print_numbers(n)
+
+
+# Задание 2. Вывести числа от A до B включительно
+def print_range(a, b):
+    print(a)
+    if a < b:
+        print_range(a + 1, b)
+    elif a > b:
+        print_range(a - 1, b)
+a = int(input())
+b = int(input())
+print_range(a, b)
+
+
+
+
+# Задание 3. Вычислить сумму цифр числа
+def digit_sum(n):
+    if n < 10:
+        return n
+    return n % 10 + digit_sum(n // 10)
+n = int(input())
+print(digit_sum(n))
+
+
+
+# Задание 4. Вывести простые делители по возрастанию
+# Повторяющиеся простые множители выводятся с повторениями.
+# Сложность: O(sqrt(n)).
+def prime_divisors(n, divisor=2):
+    if n == 1:
+        return
+    if divisor * divisor > n:
+        print(n)
+        return
+    if n % divisor == 0:
+        print(divisor)
+        prime_divisors(n // divisor, divisor)
+    else:
+        prime_divisors(n, divisor + 1)
+n = int(input())
+prime_divisors(n)
